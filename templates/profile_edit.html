@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Edit Profile — SecureJobs</title>
+<script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 min-h-screen">
+
+<nav class="bg-white shadow-md p-4 flex justify-between px-8">
+  <div class="text-xl font-bold text-blue-700">SecureJobs</div>
+  <div>
+    <a href="/profile" class="mr-4 text-blue-600">← Back to Profile</a>
+    <a href="/logout" class="text-red-600">Logout</a>
+  </div>
+</nav>
+
+<div class="max-w-2xl mx-auto mt-10 bg-white shadow-xl rounded-xl p-8">
+  <h2 class="text-2xl font-bold mb-6 text-gray-800">Edit Profile</h2>
+
+  <form method="post" action="/profile/edit" class="space-y-5">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+
+    <div>
+      <label class="block text-sm font-medium text-gray-700 mb-1">Full Name</label>
+      <input name="full_name" value="{{ user.full_name }}" required
+             class="w-full border p-3 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none">
+    </div>
+
+    <div>
+      <label class="block text-sm font-medium text-gray-700 mb-1">Phone</label>
+      <input name="phone" value="{{ user.phone or '' }}"
+             class="w-full border p-3 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none">
+    </div>
+
+    <div>
+      <label class="block text-sm font-medium text-gray-700 mb-1">
+        Headline
+        <span class="text-gray-400 font-normal">(max 160 chars)</span>
+      </label>
+      <input name="headline" value="{{ user.headline or '' }}" maxlength="160"
+             placeholder="e.g. Software Engineer at Acme Corp"
+             class="w-full border p-3 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none">
+    </div>
+
+    <div>
+      <label class="block text-sm font-medium text-gray-700 mb-1">Location</label>
+      <input name="location" value="{{ user.location or '' }}" maxlength="120"
+             placeholder="e.g. Delhi, India"
+             class="w-full border p-3 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none">
+    </div>
+
+    <div>
+      <label class="block text-sm font-medium text-gray-700 mb-1">Bio</label>
+      <textarea name="bio" rows="4"
+                placeholder="Tell recruiters a bit about yourself..."
+                class="w-full border p-3 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none resize-none">{{ user.bio or '' }}</textarea>
+    </div>
+
+    <button class="w-full bg-blue-600 text-white py-3 rounded-lg font-semibold hover:bg-blue-700">
+      Save Changes
+    </button>
+  </form>
+</div>
+
+</body>
+</html>

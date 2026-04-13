@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Applicants</title>
+<script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100">
+
+<div class="max-w-5xl mx-auto mt-10">
+
+  <h1 class="text-3xl font-bold mb-6">Applicants</h1>
+
+  {% for app in applications %}
+  <div class="bg-white p-5 rounded-lg shadow mb-4">
+
+    <h2 class="text-lg font-semibold">
+      {{ users[app.user_id].full_name }}
+    </h2>
+
+    <p class="text-gray-600">
+      {{ users[app.user_id].email }}
+    </p>
+
+    <p class="mt-2">
+      Status:
+      <span class="font-bold text-blue-600">
+        {{ app.status }}
+      </span>
+    </p>
+
+    <form method="post" action="/application/{{ app.id }}/status" class="mt-3 flex gap-2">
+      <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+
+      <select name="status" class="border p-2 rounded">
+        <option>Applied</option>
+        <option>Reviewed</option>
+        <option>Interviewed</option>
+        <option>Rejected</option>
+        <option>Offer</option>
+      </select>
+
+      <button class="bg-green-600 text-white px-3 py-1 rounded">
+        Update
+      </button>
+
+    </form>
+
+  </div>
+  {% endfor %}
+
+</div>
+
+</body>
+</html>

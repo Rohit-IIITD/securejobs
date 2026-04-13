@@ -1,0 +1,33 @@
+# ── Web framework ──────────────────────────────────────────────
+fastapi
+uvicorn[standard]
+python-multipart          # Form / file upload parsing
+
+# ── Templating ─────────────────────────────────────────────────
+jinja2
+
+# ── Database ───────────────────────────────────────────────────
+sqlalchemy
+psycopg2-binary           # PostgreSQL driver
+
+# ── Auth / crypto ──────────────────────────────────────────────
+bcrypt
+python-jose[cryptography] # JWT
+pyotp                     # TOTP 2FA
+cryptography              # AES-256-GCM resume encryption
+
+# ── QR code generation ─────────────────────────────────────────
+qrcode
+Pillow                    # qrcode dependency for PNG output
+
+# ── Secrets management ─────────────────────────────────────────
+python-dotenv             # loads .env into os.environ
+
+# ── CSRF protection ────────────────────────────────────────────
+fastapi-csrf-protect
+
+# ── Rate limiting ──────────────────────────────────────────────
+slowapi                   # Brute-force protection on auth routes
+
+# ── Async file I/O (optional, used by some upload patterns) ────
+aiofiles

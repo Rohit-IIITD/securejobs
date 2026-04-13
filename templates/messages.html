@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Messages</title>
+<script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100">
+
+<div class="max-w-3xl mx-auto mt-10">
+
+  <h1 class="text-2xl font-bold mb-4">
+    Chat with {{ other_user.full_name }}
+  </h1>
+
+  <div class="bg-white p-4 rounded-lg shadow h-96 overflow-y-scroll">
+
+    {% for msg in messages %}
+      <div class="mb-3">
+        {% if msg.sender == user.id %}
+          <div class="text-right">
+            <span class="bg-blue-500 text-white px-3 py-1 rounded inline-block">
+              {{ msg.text }}
+            </span>
+          </div>
+        {% else %}
+          <div class="text-left">
+            <span class="bg-gray-300 px-3 py-1 rounded inline-block">
+              {{ msg.text }}
+            </span>
+          </div>
+        {% endif %}
+      </div>
+    {% endfor %}
+
+  </div>
+
+  <form method="post" action="/message/send" class="mt-4 flex gap-2">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+    <input type="hidden" name="receiver_id" value="{{ receiver_id }}">
+
+    <input name="content" placeholder="Type a message..."
+           class="flex-1 border p-3 rounded">
+
+    <button class="bg-blue-600 text-white px-4 rounded">
+      Send
+    </button>
+  </form>
+
+</div>
+
+</body>
+</html>

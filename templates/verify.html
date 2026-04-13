@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Set Up Authenticator — SecureJobs</title>
+<script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 flex items-center justify-center min-h-screen">
+
+<div class="bg-white shadow-xl rounded-xl p-8 text-center max-w-sm w-full">
+  <h2 class="text-2xl font-bold text-blue-700 mb-2">Set Up Authenticator</h2>
+  <p class="text-gray-500 text-sm mb-6">
+    Scan this QR code with Google Authenticator (or any TOTP app),
+    then enter the 6-digit code to confirm setup.
+  </p>
+
+  {% if request.query_params.get("error") == "invalid_otp" %}
+    <p class="text-red-600 text-sm mb-4">❌ Invalid code. Try again.</p>
+  {% endif %}
+
+  <img src="data:image/png;base64,{{ qr }}" class="mx-auto mb-6 rounded-lg border p-2">
+
+  <form method="post" action="/setup-totp/{{ email }}">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+
+    <input name="otp" placeholder="6-digit code" maxlength="6"
+           class="border p-3 rounded-lg w-full mb-4 text-center tracking-widest text-xl
+                  focus:ring-2 focus:ring-blue-500 outline-none">
+
+    <button class="bg-blue-600 text-white px-6 py-2 rounded-lg w-full
+                   font-semibold hover:bg-blue-700">
+      Confirm &amp; Finish Setup
+    </button>
+  </form>
+</div>
+
+</body>
+</html>

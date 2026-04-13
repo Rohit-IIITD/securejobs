@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Recruiter Dashboard</title>
+<script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100">
+
+<div class="max-w-5xl mx-auto mt-10">
+
+  <h1 class="text-3xl font-bold mb-6">Your Job Postings</h1>
+
+  {% for job in jobs %}
+  <div class="bg-white p-5 rounded-lg shadow mb-4">
+    <h2 class="text-xl font-semibold">{{ job.title }}</h2>
+
+    <a href="/job/{{ job.id }}/applicants"
+       class="text-blue-600 font-medium">
+       View Applicants →
+    </a>
+  </div>
+  {% endfor %}
+
+</div>
+
+</body>
+</html>

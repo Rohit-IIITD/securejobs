@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Create Job</title>
+<script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100">
+
+<div class="max-w-xl mx-auto mt-10 bg-white p-6 rounded-lg shadow">
+
+  <h2 class="text-xl font-bold mb-4">Post a Job</h2>
+
+  <form method="post" class="space-y-4">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+
+    <input name="title" placeholder="Job Title"
+           class="w-full border p-3 rounded">
+
+    <textarea name="description" placeholder="Job Description"
+              class="w-full border p-3 rounded"></textarea>
+
+    <input name="skills" placeholder="Skills (comma separated)"
+           class="w-full border p-3 rounded">
+
+    <input name="location" placeholder="Location"
+           class="w-full border p-3 rounded">
+
+    <button class="bg-blue-600 text-white px-4 py-2 rounded">
+      Create Job
+    </button>
+
+  </form>
+
+</div>
+
+</body>
+</html>
