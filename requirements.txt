@@ -24,10 +24,23 @@ Pillow                    # qrcode dependency for PNG output
 python-dotenv             # loads .env into os.environ
 
 # ── CSRF protection ────────────────────────────────────────────
-fastapi-csrf-protect==0.2.1
+fastapi-csrf-protect
 
 # ── Rate limiting ──────────────────────────────────────────────
 slowapi                   # Brute-force protection on auth routes
 
 # ── Async file I/O (optional, used by some upload patterns) ────
 aiofiles
+
+# ── CSRF ──────────────────────────────────────────────────────
+from fastapi_csrf_protect import CsrfProtect
+from pydantic import BaseModel
+
+class CsrfSettings(BaseModel):
+    secret_key: str = SECRET_KEY
+    token_location: str = "body"
+    token_key: str = "csrf_token"
+
+@CsrfProtect.load_config
+def get_csrf_config():
+    return CsrfSettings()
