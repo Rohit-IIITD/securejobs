@@ -37,6 +37,19 @@ from starlette.responses import Response
 # ── 1. Config (must be first — everything else reads from it) ──
 from config import RESUME_DIR, SECRET_KEY
 
+
+# ── CSRF config (must be before route imports) ────────────────
+from fastapi_csrf_protect import CsrfProtect
+from pydantic import BaseModel
+
+class CsrfSettings(BaseModel):
+    secret_key: str = SECRET_KEY
+
+@CsrfProtect.load_config
+def get_csrf_config():
+    return CsrfSettings()
+
+
 # ── 2. Database infrastructure ────────────────────────────────
 from database import Base, engine
 
@@ -144,8 +157,8 @@ class SecurityHeadersMiddleware(BaseHTTPMiddleware):
 # ══════════════════════════════════════════════════════════════
 # CSRF CONFIGURATION
 # ══════════════════════════════════════════════════════════════
-class CsrfSettings(BaseModel):
-    secret_key: str = "bd0447a26bb0e59b875d3ca7ce2d10bfa668cca9b23d8c34fd2124d2b9e35358"
+# class CsrfSettings(BaseModel):
+    # secret_key: str = "bd0447a26bb0e59b875d3ca7ce2d10bfa668cca9b23d8c34fd2124d2b9e35358"
  
 
 
