@@ -46,31 +46,7 @@
   </p>
 </div>
 
-<script>
-  document.getElementById("register-form").addEventListener("submit", function(e) {
-    e.preventDefault();
-    const form = e.target;
-    const token = form.querySelector('input[name="csrf_token"]').value;
-    const data = new FormData(form);
 
-    fetch("/register", {
-      method: "POST",
-      headers: { "X-CSRF-Token": token },
-      credentials: "include",
-      body: data
-    }).then(res => {
-      if (res.redirected) {
-        window.location.href = res.url;
-      } else {
-        res.text().then(html => {
-          document.open();
-          document.write(html);
-          document.close();
-        });
-      }
-    });
-  });
-</script>
 
 </body>
 </html>
