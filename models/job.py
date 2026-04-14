@@ -7,7 +7,7 @@ Conversation, ConversationParticipant, Message, AuditLog.
  
 from datetime import datetime
  
-from sqlalchemy import Column, DateTime, ForeignKey, Integer, String, Text, Boolean
+from sqlalchemy import Boolean, Column, DateTime, ForeignKey, Integer, String, Text
 from database import Base
  
  
@@ -46,6 +46,7 @@ class Conversation(Base):
     __tablename__ = "conversations"
  
     id         = Column(Integer, primary_key=True, index=True)
+    is_group   = Column(Boolean, default=False)
     created_at = Column(DateTime, default=datetime.utcnow)
  
  
@@ -79,3 +80,4 @@ class AuditLog(Base):
     row_hash      = Column(String(64), nullable=True)
     row_signature = Column(Text, nullable=True)
     logged_at     = Column(DateTime, default=datetime.utcnow)
+ 

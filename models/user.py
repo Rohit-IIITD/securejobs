@@ -19,7 +19,7 @@ class User(Base):
     phone            = Column(String(30), nullable=True)
     hashed_pw        = Column(String(255), nullable=False)
     otp_secret       = Column(String(64), nullable=True)
-    role             = Column(String(20), default="user")       # user | recruiter | admin
+    role             = Column(String(20), default="user")
     is_verified      = Column(Boolean, default=False)
     is_admin         = Column(Boolean, default=False)
     is_suspended     = Column(Boolean, default=False)
@@ -38,6 +38,7 @@ class EmailOTP(Base):
     id         = Column(Integer, primary_key=True, index=True)
     email      = Column(String(255), index=True, nullable=False)
     code       = Column(String(10), nullable=False)
-    purpose    = Column(String(50), nullable=False)   # e.g. "registration"
+    purpose    = Column(String(50), nullable=False)
     used       = Column(Boolean, default=False)
+    expires_at = Column(DateTime, nullable=True)
     created_at = Column(DateTime, default=datetime.utcnow)
