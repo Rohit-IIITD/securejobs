@@ -22,7 +22,7 @@ MESSAGE_KEY = os.environ["MESSAGE_KEY"].encode()
 
 # ── PostgreSQL ────────────────────────────────────────────────
 # ── PostgreSQL ────────────────────────────────────────────────
-DB_URL = os.environ["postgresql://securejobs_db_user:fjP03twMMMZ3e2LAJSOytVUC13ltn2xf@dpg-d7eicilckfvc73a7qmhg-a/securejobs_db"]
+DB_URL = os.environ["DATABASE_URL"]
 # ── Gmail SMTP ────────────────────────────────────────────────
 SMTP_EMAIL        = os.environ["SMTP_EMAIL"]
 SMTP_APP_PASSWORD = os.environ["SMTP_APP_PASSWORD"]
