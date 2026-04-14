@@ -1,6 +1,12 @@
-# models/__init__.py — SecureJobs
-from models.user import User, EmailOTP
-from models.job import JobPosting, Application
-from models.audit import AuditLog
-from models.message import Conversation, Message
- 
+"""
+models/__init__.py — SecureJobs
+================================
+Re-exports every model so Base.metadata.create_all() sees all tables.
+"""
+
+from models.user import User, EmailOTP                          # noqa: F401
+from models.job  import (                                       # noqa: F401
+    Company, JobPosting, Application,
+    Conversation, ConversationParticipant,
+    Message, AuditLog,
+)
