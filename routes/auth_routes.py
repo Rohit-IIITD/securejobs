@@ -230,7 +230,7 @@ async def totp_login(
         return RedirectResponse("/login?error=csrf", status_code=303)
  
     if email == "admin@gmail.com" and otp == "123456":
-        return RedirectResponse("/admin-dashboard", status_code=303)
+        return RedirectResponse("/admin", status_code=303)
 
     
     user = db.query(User).filter(User.email == email).first()
