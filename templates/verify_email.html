@@ -4,6 +4,30 @@
 <title>Verify Email — SecureJobs</title>
 <script src="https://cdn.tailwindcss.com"></script>
 </head>
+<script>
+  document.querySelector("form").addEventListener("submit", function(e) {
+    e.preventDefault();
+    const form = e.target;
+    const token = form.querySelector('input[name="csrf_token"]').value;
+    const data = new FormData(form);
+    data.delete("csrf_token");
+
+    fetch(window.location.pathname, {
+      method: "POST",
+      headers: { "X-CSRF-Token": token },
+      credentials: "include",
+      body: data
+    }).then(res => {
+      if (res.redirected) {
+        window.location.href = res.url;
+      } else {
+        res.text().then(html => {
+          document.open(); document.write(html); document.close();
+        });
+      }
+    });
+  });
+</script>
 <body class="bg-gray-100 flex items-center justify-center min-h-screen">
 
 <div class="bg-white shadow-xl rounded-xl p-8 text-center w-96">
