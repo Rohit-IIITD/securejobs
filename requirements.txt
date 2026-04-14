@@ -24,7 +24,7 @@ Pillow                    # qrcode dependency for PNG output
 python-dotenv             # loads .env into os.environ
 
 # ── CSRF protection ────────────────────────────────────────────
-fastapi-csrf-protect
+fastapi-csrf-protect==0.2.1
 
 # ── Rate limiting ──────────────────────────────────────────────
 slowapi                   # Brute-force protection on auth routes
