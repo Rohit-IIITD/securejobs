@@ -145,7 +145,9 @@ class SecurityHeadersMiddleware(BaseHTTPMiddleware):
 # CSRF CONFIGURATION
 # ══════════════════════════════════════════════════════════════
 class CsrfSettings(BaseModel):
-    secret_key: str = SECRET_KEY
+    secret_key: str = "bd0447a26bb0e59b875d3ca7ce2d10bfa668cca9b23d8c34fd2124d2b9e35358"
+    token_location: str = "body"
+    token_key: str = "csrf_token"
 
 @CsrfProtect.load_config
 def get_csrf_config():
