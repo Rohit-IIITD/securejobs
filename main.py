@@ -19,6 +19,7 @@ SECURITY ADDITIONS:
 """
 
 import logging
+logger = logging.getLogger(__name__)
 import os
 
 from fastapi import FastAPI, Request
@@ -155,6 +156,13 @@ def get_csrf_config():
 # APP INSTANCE
 # ══════════════════════════════════════════════════════════════
 app = FastAPI()
+from fastapi.exceptions import RequestValidationError
+from fastapi.responses import JSONResponse
+
+@app.exception_handler(RequestValidationError)
+async def validation_exception_handler(request, exc):
+    logger.error("422 error: %s", exc.errors())
+    return JSONResponse(status_code=422, content={"detail": exc.errors()})
 
 # ── Attach rate limiter state and middleware ──────────────────
 app.state.limiter = limiter
