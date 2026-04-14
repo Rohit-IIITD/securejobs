@@ -21,13 +21,8 @@ AES_KEY = os.environ["AES_KEY"].encode()[:32]   # exactly 32 bytes
 MESSAGE_KEY = os.environ["MESSAGE_KEY"].encode()
 
 # ── PostgreSQL ────────────────────────────────────────────────
-DB_URL = (
-    f"postgresql+psycopg2://"
-    f"{os.environ['DB_USER']}:{os.environ['DB_PASSWORD']}"
-    f"@{os.environ['DB_HOST']}:{os.environ.get('DB_PORT', '5432')}"
-    f"/{os.environ['DB_NAME']}"
-)
-
+# ── PostgreSQL ────────────────────────────────────────────────
+DB_URL = os.environ["postgresql://securejobs_db_user:fjP03twMMMZ3e2LAJSOytVUC13ltn2xf@dpg-d7eicilckfvc73a7qmhg-a/securejobs_db"]
 # ── Gmail SMTP ────────────────────────────────────────────────
 SMTP_EMAIL        = os.environ["SMTP_EMAIL"]
 SMTP_APP_PASSWORD = os.environ["SMTP_APP_PASSWORD"]
